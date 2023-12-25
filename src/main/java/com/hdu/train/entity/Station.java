@@ -26,7 +26,6 @@ public class Station implements Serializable {
      */
     private String trainNo;
 
-
     /**
      * 站点名
      */

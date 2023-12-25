@@ -53,5 +53,9 @@ public class UserController {
         }
         return Result.error().message("获取失败");
     }
+    @PostMapping("/logout")
+    public Result Logout(){
+        return Result.ok().message("登出成功");
+    }
 
 }
