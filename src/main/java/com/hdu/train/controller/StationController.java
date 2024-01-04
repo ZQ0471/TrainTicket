@@ -1,6 +1,7 @@
 package com.hdu.train.controller;
 
 import com.hdu.train.DTO.NameDTO;
+import com.hdu.train.DTO.NonStopStationDTO;
 import com.hdu.train.DTO.TransitDTO;
 import com.hdu.train.entity.Station;
 import com.hdu.train.result.Result;
@@ -33,7 +34,6 @@ public class StationController {
     @GetMapping("/list")
     public Result StationList(@RequestParam("trainNo") String trainNo){
         List<Station> stationList = iStationService.getStationList(trainNo);
-        System.out.println(stationList);
         return Result.ok().data("items",stationList).data("total",stationList.size());
     }
     @GetMapping("/stationName")
@@ -41,6 +41,7 @@ public class StationController {
         List<NameDTO> stationNameList = iStationService.getStationName();
         return Result.ok().data("number",stationNameList);
     }
+    /* 中转车站*/
     @GetMapping("/search")
     private Result SearchStation(@RequestParam String start_station, String end_station){
         List<TransitDTO> transitDTOS = iStationService.searchStation(start_station,end_station);
@@ -50,6 +51,12 @@ public class StationController {
                 trains.add(item);
             }
         });
+        return Result.ok().data("list",trains);
+    }
+    /*直达车站*/
+    @GetMapping("/find")
+    private Result FindStation(@RequestParam String start_station, String end_station){
+        List<NonStopStationDTO> trains = iStationService.findStation(start_station,end_station);
         return Result.ok().data("list",trains);
     }
 

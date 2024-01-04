@@ -3,6 +3,7 @@ package com.hdu.train.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hdu.train.DTO.NameDTO;
+import com.hdu.train.DTO.NonStopStationDTO;
 import com.hdu.train.DTO.TransitDTO;
 import com.hdu.train.entity.Station;
 import com.hdu.train.mapper.StationMapper;
@@ -47,5 +48,10 @@ public class StationServiceImpl extends ServiceImpl<StationMapper, Station> impl
     @Override
     public List<TransitDTO> searchStation(String startStation, String endStation) {
         return this.baseMapper.searchStation(startStation,endStation);
+    }
+
+    @Override
+    public List<NonStopStationDTO> findStation(String startStation, String endStation) {
+        return this.baseMapper.findStation(startStation,endStation);
     }
 }

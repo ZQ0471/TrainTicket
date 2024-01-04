@@ -1,6 +1,7 @@
 package com.hdu.train.service;
 
 import com.hdu.train.DTO.NameDTO;
+import com.hdu.train.DTO.NonStopStationDTO;
 import com.hdu.train.DTO.TransitDTO;
 import com.hdu.train.entity.Station;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -22,4 +23,6 @@ public interface IStationService extends IService<Station> {
     List<NameDTO> getStationName();
 
     List<TransitDTO> searchStation(String startStation, String endStation);
+
+    List<NonStopStationDTO> findStation(String startStation, String endStation);
 }

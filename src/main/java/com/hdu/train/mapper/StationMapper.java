@@ -1,5 +1,6 @@
 package com.hdu.train.mapper;
 
+import com.hdu.train.DTO.NonStopStationDTO;
 import com.hdu.train.DTO.TransitDTO;
 import com.hdu.train.entity.Station;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -32,4 +33,13 @@ public interface StationMapper extends BaseMapper<Station> {
             "  AND s3.station_order < s4.station_order\n" +
             "  AND s1.train_no <> s4.train_no")
     List<TransitDTO> searchStation(@Param("startStation")String startStation, @Param("endStation")String endStation);
+    @Select("SELECT s1.train_no AS trainNo,s1.station_name AS startStation,\n" +
+            "s2.station_name AS endStation,\n" +
+            "s1.leave_time AS leaveTime,s2.arrive_time AS arriveTime\n" +
+            "FROM station s1\n" +
+            "INNER JOIN station s2 ON s1.train_no = s2.train_no\n" +
+            "WHERE s1.station_name = #{startStation}\n" +
+            "  AND s2.station_name = #{endStation}\n" +
+            "  AND s1.station_order < s2.station_order")
+    List<NonStopStationDTO> findStation(@Param("startStation")String startStation, @Param("endStation")String endStation);
 }
